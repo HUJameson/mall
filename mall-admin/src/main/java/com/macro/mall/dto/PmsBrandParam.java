@@ -15,7 +15,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @EqualsAndHashCode
 public class PmsBrandParam {
-    @NotEmpty
+    @NotEmpty(message = "名称不能为空")
     @ApiModelProperty(value = "品牌名称",required = true)
     private String name;
     @ApiModelProperty(value = "品牌首字母")

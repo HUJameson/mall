@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 app_name='mall-admin'
+docker stop ${app_name}
+echo '----stop container----'
+docker rm ${app_name}
+echo '----rm container----'
 docker run -p 18080:8080 --name ${app_name} \
 -e TZ="Asia/Shanghai" \
 -v /etc/localtime:/etc/localtime \

@@ -232,11 +232,6 @@
                                 <name>mall/${project.name}:${project.version}</name>
                                 <!--定义镜像构建行为-->
                                 <build>
-                                    <buildx>
-                                        <platforms>
-                                            <platform>linux/amd64</platform>
-                                        </platforms>
-                                    </buildx>
                                     <!--定义基础镜像-->
                                     <from>openjdk:8</from>
                                     <args>

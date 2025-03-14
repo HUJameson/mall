@@ -12,7 +12,7 @@ if [ -n "$CID_SERVICE" ]; then
                 docker rm -f $SERVICE_NAME
         echo "完成docker容器的停止和删除：$SERVICE_NAME"
 fi
-CID_SERVICE=$(docker images -a | grep -E '$SERVICE_NAME.*$VERSION' | awk '{print $1}')
+CID_SERVICE=$(docker images -a | grep -E "$SERVICE_NAME.*$VERSION" | awk '{print $1}')
 if [ -n "$CID_SERVICE" ]; then
         echo "存在$SERVICE_NAME镜像，CID_SERVICE =$CID_SERVICE，开始删除docker镜像 ..."
                 docker rmi $SERVICE_NAME:$VERSION

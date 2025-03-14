@@ -31,7 +31,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <skipTests>true</skipTests>
-        <docker.host>http://172.17.0.11:2375</docker.host>
+<!--        <docker.host>http://172.17.0.11:2375</docker.host>-->
+        <docker.host>http://127.0.0.1:2375</docker.host>
         <docker.maven.plugin.version>0.40.2</docker.maven.plugin.version>
         <pagehelper-starter.version>1.4.5</pagehelper-starter.version>
         <pagehelper.version>5.3.2</pagehelper.version>
@@ -215,13 +216,13 @@
                     <version>${docker.maven.plugin.version}</version>
                         <executions>
                             <!--如果想在项目打包时构建镜像添加-->
-                            <execution>
-                                <id>build-image</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
+<!--                            <execution>-->
+<!--                                <id>build-image</id>-->
+<!--                                <phase>package</phase>-->
+<!--                                <goals>-->
+<!--                                    <goal>build</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
                         </executions>
                     <configuration>
                         <!-- Docker 远程管理地址-->

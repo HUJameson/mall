@@ -4,7 +4,7 @@ DOCFILE_NAME=Dockerfile-mall-admin
 #docker login --username=hujameson@gmail.com --password=Tender512 registry.cn-hangzhou.aliyuncs.com
 #docker pull registry.cn-hangzhou.aliyuncs.com/cr-mall/$SERVICE_NAME:1.0-SNAPSHOT
 #docker tag registry.cn-hangzhou.aliyuncs.com/cr-mall/$SERVICE_NAME:1.0-SNAPSHOT $SERVICE_NAME:1.0-SNAPSHOT
-mv $DOCFILE_NAME Dockerfile
+cp $DOCFILE_NAME Dockerfile
 docker build --platform linux/amd64 -t $SERVICE_NAME:1.0-SNAPSHOT .
 CID_SERVICE=$(docker ps -a | grep "$SERVICE_NAME" | awk '{print $1}')
 if [ -n "$CID_SERVICE" ]; then

@@ -30,11 +30,11 @@ spring:
     timeout: 300ms # 连接超时时间（毫秒）
 
   rabbitmq:
-    host: rabbit
+    host: rabbitmq
     port: 5672
     virtual-host: /mall
-    username: mall
-    password: mall
+    username: admin
+    password: admin
 
 mongo:
   insert:

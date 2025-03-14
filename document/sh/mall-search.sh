@@ -1,16 +1,24 @@
-#!/usr/bin/env bash
-app_name='mall-search'
-docker stop ${app_name}
-echo '----stop container----'
-docker rm ${app_name}
-echo '----rm container----'
-docker rmi `docker images | grep none | awk '{print $3}'`
-echo '----rm none images----'
-docker run -p 8081:8081 --name ${app_name} \
---link mysql:db \
---link elasticsearch:es \
+SERVICE_NAME=mall-search
+DOCFILE_NAME=Dockerfile-$SERVICE_NAME
+#docker build --platform linux/amd64 -t registry.cn-hangzhou.aliyuncs.com/cr-mall/$SERVICE_NAME:1.0-SNAPSHOT
+#docker login --username=hujameson@gmail.com --password=Tender512 registry.cn-hangzhou.aliyuncs.com
+#docker pull registry.cn-hangzhou.aliyuncs.com/cr-mall/$SERVICE_NAME:1.0-SNAPSHOT
+#docker tag registry.cn-hangzhou.aliyuncs.com/cr-mall/$SERVICE_NAME:1.0-SNAPSHOT $SERVICE_NAME:1.0-SNAPSHOT
+docker build --platform linux/amd64 -f $DOCFILE_NAME -t $SERVICE_NAME:1.0-SNAPSHOT .
+CID_SERVICE=$(docker ps -a | grep "$SERVICE_NAME" | awk '{print $1}')
+if [ -n "$CID_SERVICE" ]; then
+        echo "存在$SERVICE_NAME容器，CID_SERVICE =$CID_SERVICE，停止docker容器 ..."
+                docker stop -f $SERVICE_NAME
+                docker rm -f $SERVICE_NAME
+        echo "docker rm -f $SERVICE_NAME容器停止完成"
+fi
+echo "docker run创建容器..."
+docker run -p 8085:8085 --name $SERVICE_NAME \
+--link redis:redis \
+--link mongo:mongo \
+--link rabbitmq:rabbit \
 -e TZ="Asia/Shanghai" \
 -v /etc/localtime:/etc/localtime \
--v /mydata/app/${app_name}/logs:/var/logs \
--d mall/${app_name}:1.0-SNAPSHOT
-echo '----start container----'
+-v /mydata/app/portal/logs:/var/logs \
+-d $SERVICE_NAME:1.0-SNAPSHOT
+echo "$SERVICE_NAME容器创建完成"

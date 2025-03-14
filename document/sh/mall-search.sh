@@ -8,8 +8,8 @@ docker build --platform linux/amd64 -f $DOCFILE_NAME -t $SERVICE_NAME:1.0-SNAPSH
 CID_SERVICE=$(docker ps -a | grep "$SERVICE_NAME" | awk '{print $1}')
 if [ -n "$CID_SERVICE" ]; then
         echo "存在$SERVICE_NAME容器，CID_SERVICE =$CID_SERVICE，停止docker容器 ..."
-                docker stop -f $SERVICE_NAME
-                docker rm $SERVICE_NAME
+                docker stop $SERVICE_NAME
+                docker rm -f $SERVICE_NAME
         echo "docker rm -f $SERVICE_NAME容器停止完成"
 fi
 echo "docker run创建容器..."
